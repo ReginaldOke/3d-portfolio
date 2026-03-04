@@ -17,10 +17,30 @@ export default function GalleryRoom() {
         mesh.receiveShadow = true
         mesh.castShadow = true
 
-        // Hide Art placeholders and Frames — our Painting components replace them
         const mat = mesh.material as THREE.Material
-        if (mat.name === 'Art' || mat.name === 'Frame') {
-          mesh.visible = false
+
+        // Make Art placeholders white — fills the wall recess behind our paintings
+        if (mat.name === 'Art') {
+          const artMat = mat as THREE.MeshStandardMaterial
+          artMat.map = null
+          artMat.emissiveMap = null
+          artMat.color.set('#f0f0f0')
+          artMat.emissive.set('#000000')
+          artMat.roughness = 0.9
+          artMat.metalness = 0.0
+          artMat.needsUpdate = true
+        }
+
+        // Make Frame material white to fill wall recesses cleanly
+        if (mat.name === 'Frame') {
+          const frameMat = mat as THREE.MeshStandardMaterial
+          frameMat.map = null
+          frameMat.emissiveMap = null
+          frameMat.color.set('#f0f0f0')
+          frameMat.emissive.set('#000000')
+          frameMat.roughness = 0.9
+          frameMat.metalness = 0.0
+          frameMat.needsUpdate = true
         }
       }
     })

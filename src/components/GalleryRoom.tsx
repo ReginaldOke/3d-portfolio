@@ -22,18 +22,6 @@ export default function GalleryRoom() {
         if (mat.name === 'Art' || mat.name === 'Frame') {
           mesh.visible = false
         }
-
-        // Tint water blue to match the model preview
-        if (mat.name === 'Water') {
-          const waterMat = mat as THREE.MeshStandardMaterial
-          waterMat.color.set('#5b9bd5')
-          waterMat.emissive.set('#4a88c2')
-          waterMat.emissiveIntensity = 0.15
-          waterMat.roughness = 0.05
-          waterMat.metalness = 0.15
-          waterMat.envMapIntensity = 2.0
-          waterMat.needsUpdate = true
-        }
       }
     })
 

@@ -30,7 +30,8 @@ export default function CameraController({
 
   const targetPos = useRef(new THREE.Vector3(0, 1.6, 8))
   const targetLookAt = useRef(new THREE.Vector3(0, 1.8, 0))
-  const currentLookAt = useRef(new THREE.Vector3(0, 1.8, 0))
+  const targetQuat = useRef(new THREE.Quaternion())
+  const _lookMatrix = useRef(new THREE.Matrix4())
 
   // Free-look state
   const yaw = useRef(0)   // horizontal angle (radians)
@@ -233,6 +234,9 @@ export default function CameraController({
     if (stop) {
       targetPos.current.set(...stop.pos)
       targetLookAt.current.set(...stop.lookAt)
+      // Precompute target quaternion for slerp (avoids lookAt singularity)
+      _lookMatrix.current.lookAt(targetPos.current, targetLookAt.current, new THREE.Vector3(0, 1, 0))
+      targetQuat.current.setFromRotationMatrix(_lookMatrix.current)
     }
   }, [currentStop])
 
@@ -245,12 +249,11 @@ export default function CameraController({
 
   useFrame((_, delta) => {
     if (navMode === 'guided') {
-      // Slow, buttery smooth interpolation — like walking slowly through a gallery
+      // Smooth interpolation using quaternion slerp to prevent camera flipping
       const lerpFactor = 1 - Math.pow(0.12, delta)
 
       camera.position.lerp(targetPos.current, lerpFactor)
-      currentLookAt.current.lerp(targetLookAt.current, lerpFactor)
-      camera.lookAt(currentLookAt.current)
+      camera.quaternion.slerp(targetQuat.current, lerpFactor)
     } else if (navMode === 'free') {
       // Initialize yaw/pitch from current camera direction on first free frame
       if (!freeInited.current) {

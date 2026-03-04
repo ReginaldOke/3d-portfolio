@@ -62,7 +62,7 @@ export default function NavigationUI({
       </div>
 
       {/* Bottom navigation bar — liquid glass */}
-      <div className={`fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full ${glass}`}>
+      <div className={`fixed bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3 sm:gap-4 px-5 sm:px-6 py-3 sm:py-3.5 rounded-full ${glass}`}>
         {/* Back arrow */}
         <button
           onClick={() => setCurrentStop(Math.max(0, currentStop - 1))}
@@ -105,8 +105,8 @@ export default function NavigationUI({
 
       {/* Free mode indicator */}
       {navMode === 'free' && (
-        <div className={`fixed bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 z-30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full ${glass}`}>
-          <p className="text-white/50 text-[9px] sm:text-[10px] tracking-wider whitespace-nowrap">
+        <div className={`fixed bottom-20 sm:bottom-24 left-1/2 -translate-x-1/2 z-30 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full ${glass}`}>
+          <p className="text-white/50 text-[10px] sm:text-[11px] tracking-wider whitespace-nowrap">
             Free exploring · <span className="text-white/70">scroll</span> to return to tour
           </p>
         </div>
@@ -115,9 +115,9 @@ export default function NavigationUI({
       {/* Initial hint — scroll + WASD (desktop only for WASD) */}
       {navMode === 'guided' && showHint && (
         <div
-          className={`fixed bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 z-30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full transition-opacity duration-1000 ${glass}`}
+          className={`fixed bottom-20 sm:bottom-24 left-1/2 -translate-x-1/2 z-30 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full transition-opacity duration-1000 ${glass}`}
         >
-          <p className="text-white/45 text-[9px] sm:text-[10px] tracking-wider whitespace-nowrap">
+          <p className="text-white/45 text-[10px] sm:text-[11px] tracking-wider whitespace-nowrap">
             <span className="text-white/65">Scroll</span> to explore
             <span className="hidden sm:inline text-white/20 mx-2">|</span>
             <span className="hidden sm:inline text-white/65">WASD</span>

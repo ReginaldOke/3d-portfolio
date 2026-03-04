@@ -141,14 +141,20 @@ export default function Painting({ data }: PaintingProps) {
     [data.slides.length]
   )
 
+  const handleZoom = useCallback(() => {
+    window.dispatchEvent(new CustomEvent('zoomPainting', {
+      detail: { slides: data.slides, currentSlide },
+    }))
+  }, [data.slides, currentSlide])
+
   const [canvasW, canvasH] = data.scale
   const stretcherDepth = 0.12 // How far canvas protrudes from wall
 
-  // Gallery label card — small plaque below painting like a real museum
-  const labelW = 0.42
-  const labelH = 0.22
+  // Gallery label card — plaque below painting like a real museum
+  const labelW = 0.72
+  const labelH = 0.38
   const labelDepth = 0.006
-  const labelGap = 0.06 // Gap between bottom of canvas and top of label
+  const labelGap = 0.08 // Gap between bottom of canvas and top of label
 
   return (
     <group ref={groupRef} position={data.position} rotation={data.rotation}>
@@ -170,6 +176,15 @@ export default function Painting({ data }: PaintingProps) {
         <group position={[0, 0, stretcherDepth / 2 + 0.001]}>
           <VideoSurface src={slide.src} width={canvasW} height={canvasH} />
         </group>
+
+        {/* Invisible click plane over painting to trigger zoom */}
+        <mesh
+          position={[0, 0, stretcherDepth / 2 + 0.002]}
+          onClick={(e) => { e.stopPropagation(); handleZoom() }}
+        >
+          <planeGeometry args={[canvasW, canvasH]} />
+          <meshBasicMaterial transparent opacity={0} />
+        </mesh>
 
         {/* Thin white border around the video (like canvas edge wrap) */}
         {/* Top edge */}
@@ -211,25 +226,33 @@ export default function Painting({ data }: PaintingProps) {
           center
           transform
           distanceFactor={1.2}
-          style={{ pointerEvents: 'none', userSelect: 'none' }}
+          style={{ pointerEvents: 'auto', userSelect: 'none', cursor: 'pointer' }}
         >
-          <div style={{
-            width: '120px',
-            padding: '6px 8px',
-            fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-          }}>
+          <div
+            style={{
+              width: '200px',
+              padding: '10px 14px',
+              fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+            }}
+            onClick={(e) => {
+              e.stopPropagation()
+              window.dispatchEvent(new CustomEvent('zoomPainting', {
+                detail: { slides: data.slides, currentSlide },
+              }))
+            }}
+          >
             <p style={{
-              fontSize: '7px',
+              fontSize: '11px',
               fontWeight: 700,
               color: '#1a1a1a',
-              margin: '0 0 2px 0',
+              margin: '0 0 4px 0',
               lineHeight: 1.3,
               letterSpacing: '-0.01em',
             }}>
               {slide.title}
             </p>
             <p style={{
-              fontSize: '4.5px',
+              fontSize: '7.5px',
               color: '#444',
               margin: '0',
               lineHeight: 1.5,
@@ -243,14 +266,14 @@ export default function Painting({ data }: PaintingProps) {
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '2px',
-                marginTop: '3px',
+                gap: '3px',
+                marginTop: '5px',
               }}>
                 {data.slides.map((_, i) => (
                   <div key={i} style={{
-                    width: i === currentSlide ? '8px' : '3px',
-                    height: '3px',
-                    borderRadius: '2px',
+                    width: i === currentSlide ? '12px' : '5px',
+                    height: '5px',
+                    borderRadius: '3px',
                     background: i === currentSlide ? '#333' : '#ccc',
                     transition: 'all 0.3s ease',
                   }} />

@@ -50,6 +50,7 @@ function Person({ url, position, rotation = 0, scale = 0.01 }: PersonProps) {
 useGLTF.preload('/models/dennis.glb')
 useGLTF.preload('/models/fabienne.glb')
 useGLTF.preload('/models/mei.glb')
+useGLTF.preload('/models/person4.glb')
 
 export default function GalleryPeople() {
   return (
@@ -73,6 +74,13 @@ export default function GalleryPeople() {
         url="/models/mei.glb"
         position={[-1.5, 0, -4]}
         rotation={-Math.PI / 2}
+      />
+
+      {/* Person 4 — in front of right wall back painting */}
+      <Person
+        url="/models/person4.glb"
+        position={[2.5, 0, -5.2]}
+        rotation={Math.PI / 2}
       />
     </group>
   )

@@ -14,6 +14,7 @@ dist-ssr
 
 # Raw source assets (large files not needed for build)
 renderpeople_free_posed_people_OBJ/
+rp_posed_00178_29_GLB/
 Art_Gallery_03.glb
 
 # Editor directories and files
@@ -26,3 +27,4 @@ Art_Gallery_03.glb
 *.njsproj
 *.sln
 *.sw?
+.vercel

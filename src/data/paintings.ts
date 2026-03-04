@@ -134,17 +134,17 @@ export const cameraPath = {
   points: [
     // 0: Entrance — overview of the gallery from the front
     { pos: [0, 1.6, 7.5] as [number, number, number], lookAt: [0, 1.75, 0] as [number, number, number] },
-    // 1: Left wall — front painting
-    { pos: [-2.0, 1.6, 5.17] as [number, number, number], lookAt: [-4.78, 1.75, 5.17] as [number, number, number] },
+    // 1: Left wall — front painting (close enough to fill viewport width)
+    { pos: [-3.8, 1.6, 5.17] as [number, number, number], lookAt: [-4.78, 1.754, 5.169] as [number, number, number] },
     // 2: Right wall — front painting
-    { pos: [2.0, 1.6, 5.17] as [number, number, number], lookAt: [4.78, 1.75, 5.17] as [number, number, number] },
+    { pos: [3.8, 1.6, 5.17] as [number, number, number], lookAt: [4.78, 1.754, 5.169] as [number, number, number] },
     // 3: Left wall — middle painting
-    { pos: [-2.0, 1.6, 0.0] as [number, number, number], lookAt: [-4.78, 1.75, 0.0] as [number, number, number] },
+    { pos: [-3.8, 1.6, 0.0] as [number, number, number], lookAt: [-4.78, 1.754, 0.002] as [number, number, number] },
     // 4: Right wall — middle painting
-    { pos: [2.0, 1.6, 0.0] as [number, number, number], lookAt: [4.78, 1.75, 0.0] as [number, number, number] },
+    { pos: [3.8, 1.6, 0.0] as [number, number, number], lookAt: [4.78, 1.754, 0.002] as [number, number, number] },
     // 5: Left wall — back painting
-    { pos: [-2.0, 1.6, -5.17] as [number, number, number], lookAt: [-4.78, 1.75, -5.17] as [number, number, number] },
+    { pos: [-3.8, 1.6, -5.17] as [number, number, number], lookAt: [-4.78, 1.754, -5.166] as [number, number, number] },
     // 6: Right wall — back painting
-    { pos: [2.0, 1.6, -5.17] as [number, number, number], lookAt: [4.78, 1.75, -5.17] as [number, number, number] },
+    { pos: [3.8, 1.6, -5.17] as [number, number, number], lookAt: [4.78, 1.754, -5.166] as [number, number, number] },
   ],
 }

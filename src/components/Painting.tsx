@@ -144,11 +144,11 @@ export default function Painting({ data }: PaintingProps) {
   const [canvasW, canvasH] = data.scale
   const stretcherDepth = 0.12 // How far canvas protrudes from wall
 
-  // Gallery label card dimensions — centered under painting
-  const labelW = 0.5
-  const labelH = 0.2
-  const labelDepth = 0.012
-  const labelGap = 0.12 // Gap between bottom of canvas and top of label
+  // Gallery label card — small plaque below painting like a real museum
+  const labelW = 0.42
+  const labelH = 0.22
+  const labelDepth = 0.006
+  const labelGap = 0.06 // Gap between bottom of canvas and top of label
 
   return (
     <group ref={groupRef} position={data.position} rotation={data.rotation}>
@@ -194,46 +194,46 @@ export default function Painting({ data }: PaintingProps) {
         </mesh>
       </group>
 
-      {/* ── DESCRIPTION CARD ── white card protruding from wall with drop shadow */}
+      {/* ── GALLERY LABEL ── small white plaque on wall below painting */}
+      {visible && (
       <group
         position={[0, -canvasH / 2 - labelGap - labelH / 2, labelDepth / 2 + 0.001]}
-        visible={visible}
       >
-        {/* Physical card — sticks out from wall slightly */}
+        {/* Physical card */}
         <mesh castShadow>
           <boxGeometry args={[labelW, labelH, labelDepth]} />
-          <meshStandardMaterial color="#ffffff" roughness={0.85} metalness={0.0} />
+          <meshStandardMaterial color="#f8f8f6" roughness={0.92} metalness={0.0} />
         </mesh>
 
-        {/* Text on the card via Html */}
+        {/* Label text — flat on card surface */}
         <Html
           position={[0, 0, labelDepth / 2 + 0.001]}
           center
-          distanceFactor={4}
-          style={{ pointerEvents: 'auto', userSelect: 'none' }}
+          transform
+          distanceFactor={1.2}
+          style={{ pointerEvents: 'none', userSelect: 'none' }}
         >
           <div style={{
-            width: '240px',
-            padding: '10px 14px',
-            fontFamily: "'Inter', Helvetica, Arial, sans-serif",
-            background: 'white',
-            borderRadius: '8px',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04)',
+            width: '120px',
+            padding: '6px 8px',
+            fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
           }}>
             <p style={{
-              fontSize: '11px',
-              fontWeight: 600,
+              fontSize: '7px',
+              fontWeight: 700,
               color: '#1a1a1a',
-              margin: '0 0 4px 0',
+              margin: '0 0 2px 0',
               lineHeight: 1.3,
+              letterSpacing: '-0.01em',
             }}>
               {slide.title}
             </p>
             <p style={{
-              fontSize: '7.5px',
-              color: '#555',
+              fontSize: '4.5px',
+              color: '#444',
               margin: '0',
               lineHeight: 1.5,
+              fontWeight: 400,
             }}>
               {slide.description}
             </p>
@@ -243,18 +243,15 @@ export default function Painting({ data }: PaintingProps) {
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                gap: '4px',
-                marginTop: '6px',
-                paddingTop: '5px',
-                borderTop: '1px solid #eee',
+                gap: '2px',
+                marginTop: '3px',
               }}>
                 {data.slides.map((_, i) => (
                   <div key={i} style={{
-                    width: i === currentSlide ? '14px' : '5px',
-                    height: '5px',
-                    borderRadius: '3px',
-                    background: i === currentSlide ? '#333' : '#d0d0d0',
+                    width: i === currentSlide ? '8px' : '3px',
+                    height: '3px',
+                    borderRadius: '2px',
+                    background: i === currentSlide ? '#333' : '#ccc',
                     transition: 'all 0.3s ease',
                   }} />
                 ))}
@@ -263,6 +260,7 @@ export default function Painting({ data }: PaintingProps) {
           </div>
         </Html>
       </group>
+      )}
 
       {/* ── CAROUSEL CHEVRONS ── liquid glass style, floating beside painting */}
       {hasMultipleSlides && (

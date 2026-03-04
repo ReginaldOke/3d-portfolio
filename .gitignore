@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Raw source assets (large files not needed for build)
+renderpeople_free_posed_people_OBJ/
+Art_Gallery_03.glb
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

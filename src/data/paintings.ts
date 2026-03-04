@@ -13,15 +13,14 @@ export interface PaintingData {
   scale: [number, number]
 }
 
-// Gallery layout:
-// - Room is 24 wide x 20 deep x 6 high
-// - Central partition column at x=0, runs from z=-3 to z=3
-// - Paintings on left wall, right wall, and both sides of central column
-// - Window on back-left wall area
-// - Wine bar near front-right
+// Gallery layout (TurboSquid Art_Gallery_03):
+// - Room is ~9.56 wide (x: -4.78 to 4.78) x ~19 deep (z: -9.6 to 9.6)
+// - 6 square picture frames (1.44 x 1.44) — 3 on each side wall
+// - Art surfaces at x = ±4.782, y = 1.754
+// - Frames at z ≈ 5.17, 0.00, -5.17
 
 export const paintings: PaintingData[] = [
-  // LEFT WALL paintings
+  // LEFT WALL — front (z = 5.17), facing +X into room
   {
     id: 'canva-homepage',
     slides: [
@@ -40,10 +39,12 @@ export const paintings: PaintingData[] = [
           'Redesigned the create modal with a focus on discoverability and user delight, enabling users to quickly find the right canvas for their creative vision.',
       },
     ],
-    position: [-11.9, 2.4, -3],
+    position: [-4.782, 1.754, 5.169],
     rotation: [0, Math.PI / 2, 0],
-    scale: [3.2, 1.8],
+    scale: [1.7, 0.96],
   },
+
+  // RIGHT WALL — front (z = 5.17), facing -X into room
   {
     id: 'project-2',
     slides: [
@@ -55,12 +56,12 @@ export const paintings: PaintingData[] = [
           'Built a comprehensive design system from the ground up, establishing consistent patterns, tokens, and components across web and mobile platforms.',
       },
     ],
-    position: [-11.9, 2.4, 4],
-    rotation: [0, Math.PI / 2, 0],
-    scale: [3.2, 1.8],
+    position: [4.782, 1.754, 5.169],
+    rotation: [0, -Math.PI / 2, 0],
+    scale: [1.7, 0.96],
   },
 
-  // CENTRAL COLUMN — left side (facing left, towards left wall)
+  // LEFT WALL — middle (z = 0), facing +X into room
   {
     id: 'project-3',
     slides: [
@@ -72,12 +73,12 @@ export const paintings: PaintingData[] = [
           'Crafted an intuitive mobile-first experience that adapts complex desktop workflows into elegant, touch-friendly interactions.',
       },
     ],
-    position: [-0.26, 2.4, 0],
-    rotation: [0, -Math.PI / 2, 0],
-    scale: [3.0, 1.7],
+    position: [-4.782, 1.754, 0.002],
+    rotation: [0, Math.PI / 2, 0],
+    scale: [1.7, 0.96],
   },
 
-  // CENTRAL COLUMN — right side (facing right, towards right wall)
+  // RIGHT WALL — middle (z = 0), facing -X into room
   {
     id: 'project-4',
     slides: [
@@ -89,12 +90,12 @@ export const paintings: PaintingData[] = [
           'Designed a data-rich analytics dashboard that transforms complex metrics into clear, actionable insights for business users.',
       },
     ],
-    position: [0.26, 2.4, 0],
-    rotation: [0, Math.PI / 2, 0],
-    scale: [3.0, 1.7],
+    position: [4.782, 1.754, 0.002],
+    rotation: [0, -Math.PI / 2, 0],
+    scale: [1.7, 0.96],
   },
 
-  // RIGHT WALL painting
+  // LEFT WALL — back (z = -5.17), facing +X into room
   {
     id: 'project-5',
     slides: [
@@ -106,27 +107,44 @@ export const paintings: PaintingData[] = [
           'Designed real-time collaboration features that enable teams to work together seamlessly, with presence indicators and contextual commenting.',
       },
     ],
-    position: [11.9, 2.4, 0],
+    position: [-4.782, 1.754, -5.166],
+    rotation: [0, Math.PI / 2, 0],
+    scale: [1.7, 0.96],
+  },
+
+  // RIGHT WALL — back (z = -5.17), facing -X into room
+  {
+    id: 'project-6',
+    slides: [
+      {
+        type: 'video',
+        src: '/videos/create-modal-redesign.mp4',
+        title: 'Brand Identity',
+        description:
+          'Led the evolution of a brand identity system, crafting a cohesive visual language that scales across products, marketing, and global touchpoints.',
+      },
+    ],
+    position: [4.782, 1.754, -5.166],
     rotation: [0, -Math.PI / 2, 0],
-    scale: [3.2, 1.8],
+    scale: [1.7, 0.96],
   },
 ]
 
 export const cameraPath = {
   points: [
     // 0: Entrance — overview of the gallery from the front
-    { pos: [0, 1.65, 8] as [number, number, number], lookAt: [0, 2.0, -2] as [number, number, number] },
-    // 1: Left wall painting 1
-    { pos: [-7, 1.65, -3] as [number, number, number], lookAt: [-11.9, 2.4, -3] as [number, number, number] },
-    // 2: Left wall painting 2
-    { pos: [-7, 1.65, 4] as [number, number, number], lookAt: [-11.9, 2.4, 4] as [number, number, number] },
-    // 3: Central column — left face
-    { pos: [-4, 1.65, 0] as [number, number, number], lookAt: [-0.26, 2.4, 0] as [number, number, number] },
-    // 4: Central column — right face
-    { pos: [4, 1.65, 0] as [number, number, number], lookAt: [0.26, 2.4, 0] as [number, number, number] },
-    // 5: Right wall painting
-    { pos: [7, 1.65, 0] as [number, number, number], lookAt: [11.9, 2.4, 0] as [number, number, number] },
-    // 6: Wine bar + window view
-    { pos: [2, 1.65, 6] as [number, number, number], lookAt: [-4, 2.0, 9.9] as [number, number, number] },
+    { pos: [0, 1.6, 7.5] as [number, number, number], lookAt: [0, 1.75, 0] as [number, number, number] },
+    // 1: Left wall — front painting
+    { pos: [-2.0, 1.6, 5.17] as [number, number, number], lookAt: [-4.78, 1.75, 5.17] as [number, number, number] },
+    // 2: Right wall — front painting
+    { pos: [2.0, 1.6, 5.17] as [number, number, number], lookAt: [4.78, 1.75, 5.17] as [number, number, number] },
+    // 3: Left wall — middle painting
+    { pos: [-2.0, 1.6, 0.0] as [number, number, number], lookAt: [-4.78, 1.75, 0.0] as [number, number, number] },
+    // 4: Right wall — middle painting
+    { pos: [2.0, 1.6, 0.0] as [number, number, number], lookAt: [4.78, 1.75, 0.0] as [number, number, number] },
+    // 5: Left wall — back painting
+    { pos: [-2.0, 1.6, -5.17] as [number, number, number], lookAt: [-4.78, 1.75, -5.17] as [number, number, number] },
+    // 6: Right wall — back painting
+    { pos: [2.0, 1.6, -5.17] as [number, number, number], lookAt: [4.78, 1.75, -5.17] as [number, number, number] },
   ],
 }

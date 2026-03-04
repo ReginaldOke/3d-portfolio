@@ -4,8 +4,6 @@ import { Environment } from '@react-three/drei'
 import type { NavMode } from '../App'
 import GalleryRoom from './GalleryRoom'
 import Paintings from './Paintings'
-import WineBar from './WineBar'
-import CityWindow from './CityWindow'
 import GalleryPeople from './GalleryPeople'
 import CameraController from './CameraController'
 import GalleryLighting from './GalleryLighting'
@@ -28,7 +26,7 @@ export default function GalleryScene({
   const { gl } = useThree()
 
   useEffect(() => {
-    const timeout = setTimeout(onLoaded, 1000)
+    const timeout = setTimeout(onLoaded, 1500)
     return () => clearTimeout(timeout)
   }, [onLoaded])
 
@@ -39,15 +37,11 @@ export default function GalleryScene({
 
   return (
     <>
-      <fog attach="fog" args={['#f0ede8', 30, 55]} />
-
-      <Environment preset="apartment" background={false} environmentIntensity={0.35} />
+      <Environment preset="apartment" background={false} environmentIntensity={0.4} />
 
       <GalleryLighting />
       <GalleryRoom />
       <Paintings />
-      <WineBar />
-      <CityWindow />
       <GalleryPeople />
 
       <CameraController
